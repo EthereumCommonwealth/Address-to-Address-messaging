@@ -21,4 +21,14 @@ contract ClassicEtherWallet_Messages {
     {
         return last_msg_index[_owner];
     }
+    
+    function showLastMessage(address _who) constant returns (address, string)
+    {
+        return (messages[_who][last_msg_index[_who]].from, messages[_who][last_msg_index[_who]].text);
+    }
+    
+    function showMessageByIndex(address _who, uint256 _index) constant returns (address, string)
+    {
+        return (messages[_who][_index].from, messages[_who][_index].text);
+    }
 }
