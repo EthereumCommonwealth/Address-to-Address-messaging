@@ -1,6 +1,12 @@
 pragma solidity ^0.4.15;
 
+contract DexNS {
+    function addressOf(string _name) constant returns (address _addr);
+}
+
 contract ClassicEtherWallet_Messages {
+    
+    DexNS dexns = DexNS(0x28fc417c046d409c14456cec0fc6f9cde46cc9f3);
     
     struct message
     {
@@ -35,7 +41,7 @@ contract ClassicEtherWallet_Messages {
         return (messages[_who][last_msg_index[_who]].from, messages[_who][last_msg_index[_who]].text);
     }
     
-    function getMessageByIndex(address _who, uint256 _index) constant returns (address, string)
+    function getIndexedMessage(address _who, uint256 _index) constant returns (address, string)
     {
         return (messages[_who][_index].from, messages[_who][_index].text);
     }
@@ -49,5 +55,32 @@ contract ClassicEtherWallet_Messages {
     {
         keys[msg.sender].key = _key;
         keys[msg.sender].key_type = _type;
+    }
+    
+    function getPublicKeyByName(string _name) constant returns (string _key, string _key_type)
+    {
+        return (keys[dexns.addressOf(_name)].key, keys[dexns.addressOf(_name)].key_type);
+    }
+    
+    function sendMessageByName(string _name, string _text)
+    {
+        messages[dexns.addressOf(_name)][last_msg_index[dexns.addressOf(_name)]].from = msg.sender;
+        messages[dexns.addressOf(_name)][last_msg_index[dexns.addressOf(_name)]].text = _text;
+        last_msg_index[dexns.addressOf(_name)]++;
+    }
+    
+    function getLastMessageByName(string _name) constant returns (address, string)
+    {
+        return (messages[dexns.addressOf(_name)][last_msg_index[dexns.addressOf(_name)]].from, messages[dexns.addressOf(_name)][last_msg_index[dexns.addressOf(_name)]].text);
+    }
+    
+    function lastIndex(string _name) constant returns (uint256)
+    {
+        return last_msg_index[dexns.addressOf(_name)];
+    }
+    
+    function getIndexedMessageByName(string _name, uint256 _index) constant returns (address, string)
+    {
+        return (messages[dexns.addressOf(_name)][_index].from, messages[dexns.addressOf(_name)][_index].text);
     }
 }
