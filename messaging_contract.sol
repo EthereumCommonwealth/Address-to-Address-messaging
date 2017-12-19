@@ -38,7 +38,8 @@ contract ClassicEtherWallet_Messages {
     
     function getLastMessage(address _who) constant returns (address, string)
     {
-        return (messages[_who][last_msg_index[_who]].from, messages[_who][last_msg_index[_who]].text);
+        require(last_msg_index[_who] > 0);
+        return (messages[_who][last_msg_index[_who] - 1].from, messages[_who][last_msg_index[_who] - 1].text);
     }
     
     function getMessageByIndex(address _who, uint256 _index) constant returns (address, string)
