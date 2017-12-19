@@ -1,5 +1,11 @@
 pragma solidity ^0.4.15;
 
+/** Ethereum Classic messaging system reference implementation
+ *
+ *  Originally designed by Dexaran
+ *  dexaran@ethereumclassic.org
+ */
+
 contract ClassicEtherWallet_Messages {
     
     struct message
