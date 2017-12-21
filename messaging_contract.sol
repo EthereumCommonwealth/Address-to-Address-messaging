@@ -8,7 +8,7 @@ pragma solidity ^0.4.15;
 
 contract ClassicEtherWallet_Messages {
     
-    event NewMessage(address indexed _sender, address indexed _receiver, uint256 _time, string message);
+    event Message(address indexed _sender, address indexed _receiver, uint256 _time, string message);
     event PublicKeyUpdated(address indexed _sender, string _key, string _keytype);
     
     struct message
@@ -32,7 +32,7 @@ contract ClassicEtherWallet_Messages {
         messages[_to][last_msg_index[_to]].from = msg.sender;
         messages[_to][last_msg_index[_to]].text = _text;
         last_msg_index[_to]++;
-        NewMessage(msg.sender, _to, now, _text);
+        Message(msg.sender, _to, now, _text);
     }
     
     function lastIndex(address _owner) constant returns (uint256)
