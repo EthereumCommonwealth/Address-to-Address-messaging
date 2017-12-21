@@ -8,7 +8,7 @@ pragma solidity ^0.4.15;
 
 contract ClassicEtherWallet_Messages {
     
-    event NewMessage(address indexed _sender, address indexed _receiver, uint256 indexed _time, string message);
+    event NewMessage(address indexed _sender, address indexed _receiver, uint256 _time, string message);
     event PublicKeyUpdated(address indexed _sender, string _key, string _keytype);
     
     struct message
