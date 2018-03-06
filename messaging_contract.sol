@@ -3,7 +3,6 @@ pragma solidity ^0.4.15;
 /** Ethereum Classic messaging system reference implementation
  *
  *  Originally designed by Dexaran
- *  dexaran@ethereumclassic.org
  */
 
 contract ClassicEtherWallet_Messages {
@@ -44,10 +43,10 @@ contract ClassicEtherWallet_Messages {
         return last_msg_index[_owner];
     }
     
-    function getLastMessage(address _who) constant returns (address, string)
+    function getLastMessage(address _who) constant returns (address, string, uint256)
     {
         require(last_msg_index[_who] > 0);
-        return (messages[_who][last_msg_index[_who] - 1].from, messages[_who][last_msg_index[_who] - 1].text);
+        return (messages[_who][last_msg_index[_who] - 1].from, messages[_who][last_msg_index[_who] - 1].text, messages[_who][last_msg_index[_who] - 1].time);
     }
     
     function getMessageByIndex(address _who, uint256 _index) constant returns (address, string)
@@ -57,7 +56,7 @@ contract ClassicEtherWallet_Messages {
     
     function newMessage(address _who, uint256 _index) constant returns (bool)
     {
-        return messages[_who][last_msg_index[_who]].time + message_staling_period > now;
+        return messages[_who][_index].time + message_staling_period > now;
     }
     
     function getPublicKey(address _who) constant returns (string _key, string _key_type)
