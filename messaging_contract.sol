@@ -15,6 +15,7 @@ contract ClassicEtherWallet_Messages {
     {
         address from;
         string  text;
+        uint256 time;
     }
     
     struct public_key_struct
@@ -27,10 +28,13 @@ contract ClassicEtherWallet_Messages {
     mapping (address => mapping (uint256 => message)) public messages;
     mapping (address => public_key_struct) public keys;
     
+    uint256 public message_staling_period = 25 days;
+    
     function sendMessage(address _to, string _text)
     {
         messages[_to][last_msg_index[_to]].from = msg.sender;
         messages[_to][last_msg_index[_to]].text = _text;
+        messages[_to][last_msg_index[_to]].time = now;
         last_msg_index[_to]++;
         Message(msg.sender, _to, now, _text);
     }
@@ -49,6 +53,11 @@ contract ClassicEtherWallet_Messages {
     function getMessageByIndex(address _who, uint256 _index) constant returns (address, string)
     {
         return (messages[_who][_index].from, messages[_who][_index].text);
+    }
+    
+    function newMessage(address _who, uint256 _index) constant returns (bool)
+    {
+        return messages[_who][last_msg_index[_who]].time + message_staling_period > now;
     }
     
     function getPublicKey(address _who) constant returns (string _key, string _key_type)
