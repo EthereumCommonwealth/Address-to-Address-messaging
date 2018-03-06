@@ -3,33 +3,6 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_who",
-				"type": "address"
-			},
-			{
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "getIndexedMessage",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
 				"name": "",
 				"type": "address"
 			}
@@ -43,47 +16,6 @@
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "getLastMessageByName",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"name": "_text",
-				"type": "string"
-			}
-		],
-		"name": "sendMessageByName",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -102,6 +34,56 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_who",
+				"type": "address"
+			},
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "newMessage",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_who",
+				"type": "address"
+			},
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getMessageByIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -154,52 +136,6 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "lastIndex",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "getIndexedMessageByName",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
 				"name": "",
 				"type": "address"
 			},
@@ -217,29 +153,10 @@
 			{
 				"name": "text",
 				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "getPublicKeyByName",
-		"outputs": [
-			{
-				"name": "_key",
-				"type": "string"
 			},
 			{
-				"name": "_key_type",
-				"type": "string"
+				"name": "time",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -305,5 +222,68 @@
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "message_staling_period",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_receiver",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_time",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"name": "Message",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_key",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_keytype",
+				"type": "string"
+			}
+		],
+		"name": "PublicKeyUpdated",
+		"type": "event"
 	}
 ]
