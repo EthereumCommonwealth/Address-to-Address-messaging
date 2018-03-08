@@ -3,11 +3,11 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
+				"name": "_owner",
 				"type": "address"
 			}
 		],
-		"name": "last_msg_index",
+		"name": "lastIndex",
 		"outputs": [
 			{
 				"name": "",
@@ -16,24 +16,6 @@
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_key",
-				"type": "string"
-			},
-			{
-				"name": "_type",
-				"type": "string"
-			}
-		],
-		"name": "setPublicKey",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -63,15 +45,75 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_who",
+				"name": "",
 				"type": "address"
 			},
 			{
-				"name": "_index",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "getMessageByIndex",
+		"name": "messages",
+		"outputs": [
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "text",
+				"type": "string"
+			},
+			{
+				"name": "time",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "message_staling_period",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "last_msg_index",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_who",
+				"type": "address"
+			}
+		],
+		"name": "getLastMessage",
 		"outputs": [
 			{
 				"name": "",
@@ -80,6 +122,10 @@
 			{
 				"name": "",
 				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -136,60 +182,15 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "messages",
-		"outputs": [
-			{
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"name": "text",
-				"type": "string"
-			},
-			{
-				"name": "time",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"name": "_text",
-				"type": "string"
-			}
-		],
-		"name": "sendMessage",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
 				"name": "_who",
 				"type": "address"
+			},
+			{
+				"name": "_index",
+				"type": "uint256"
 			}
 		],
-		"name": "getLastMessage",
+		"name": "getMessageByIndex",
 		"outputs": [
 			{
 				"name": "",
@@ -199,39 +200,6 @@
 				"name": "",
 				"type": "string"
 			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "lastIndex",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "message_staling_period",
-		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -269,6 +237,24 @@
 		"type": "event"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_key",
+				"type": "string"
+			},
+			{
+				"name": "_type",
+				"type": "string"
+			}
+		],
+		"name": "setPublicKey",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -289,5 +275,23 @@
 		],
 		"name": "PublicKeyUpdated",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"name": "_text",
+				"type": "string"
+			}
+		],
+		"name": "sendMessage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ]

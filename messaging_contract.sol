@@ -49,10 +49,14 @@ contract ClassicEtherWallet_Messages {
         return (messages[_who][last_msg_index[_who] - 1].from, messages[_who][last_msg_index[_who] - 1].text, messages[_who][last_msg_index[_who] - 1].time);
     }
     
-    function getMessageByIndex(address _who, uint256 _index) constant returns (address, string)
+    function getMessageByIndex(address _who, uint256 _index) constant returns (address, string, uint256)
+    
     {
-        return (messages[_who][_index].from, messages[_who][_index].text);
+        
+        return (messages[_who][_index - 1].from, messages[_who][_index - 1].text, messages[_who][_index - 1].time);
     }
+    
+    
     
     function newMessage(address _who, uint256 _index) constant returns (bool)
     {
